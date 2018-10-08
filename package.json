@@ -1,0 +1,25 @@
+{
+  "name": "frount-track",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkapry/frount-track.git"
+  },
+  "author": "masha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mkapry/frount-track/issues"
+  },
+  "homepage": "https://github.com/mkapry/frount-track#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.4",
+    "babel-preset-env": "^1.7.0",
+    "webpack": "^4.20.2"
+  }
+}
