@@ -3,12 +3,16 @@ const slotName = 'message-input';
 
 const template = `
     <style>${shadowStyles.toString()}</style>
-	<form>
-		<div class="result"></div>
-		<input name="message_text" placeholder="Введите сообщеине">
-		<input type="submit">
-	</form>
-`;
+ 	<header>FORM</header>
+ 	<form id="form" class="topBefore">
+         <label> In local storage info:</label>
+         <div class="info">
+         </div>
+ 		<input name = 'name' type="text" placeholder="NAME" class="info">
+ 		<input name = 'message' type="text "placeholder="Message" class="info">
+ 	    <input name = "submit" type = "submit" value="Submit">
+ 	</form>
+ `;
 
 class MessageForm extends HTMLElement {
 	constructor () {
@@ -32,7 +36,9 @@ class MessageForm extends HTMLElement {
 
 	_initElements () {
 		var form = this.shadowRoot.querySelector('form');
-		var message = this.shadowRoot.querySelector('.result');
+		var message = this.shadowRoot.querySelector('.info');
+		message.innerText = localStorage.getItem('info');
+        localStorage.clear();
 		this._elements = {
 			form: form,
 			message: message
@@ -46,10 +52,8 @@ class MessageForm extends HTMLElement {
 	}
 
 	_onSubmit (event) {
-
-		this._elements.message.innerText = Array.from(this._elements.form.elements).map(
-		el=>el.value
-		).join(', ');
+		this._elements.message.innerText = Array.from(this._elements.form.getElementsByClassName('info')).map(elem => elem.value).join(', ');
+        localStorage.setItem('info', this._elements.message.innerText);
 		event.preventDefault();
 		return false;
 	}
@@ -62,4 +66,3 @@ class MessageForm extends HTMLElement {
 }
 
 customElements.define('message-form', MessageForm);
-
