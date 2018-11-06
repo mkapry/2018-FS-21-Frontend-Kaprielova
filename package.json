@@ -1,32 +1,25 @@
 {
   "name": "frount-track",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mkapry/frount-track.git"
-  },
-  "author": "masha",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mkapry/frount-track/issues"
-  },
-  "homepage": "https://github.com/mkapry/frount-track#readme",
-  "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-preset-env": "^1.7.0",
-    "webpack": "^4.20.2",
-    "css-loader": "^1.0.0",
-    "webpack-cli": "^3.1.2"
-  },
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "node-localstorage": "^1.3.1"
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
+    "react-scripts": "2.1.1"
   },
-  "description": "web"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
