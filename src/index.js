@@ -1,4 +1,3 @@
-import say from './lib/index.js';
-say("Mariam");
-//import FormInput from './lib/index.js';
-//import MessageForm from './lib/index.js';
+import MessageForm from './lib/components/message/index.js';
+import FormFile from './lib/components/addfile/file.js'
+import FormGeo from './lib/components/geolocation/index.js'
