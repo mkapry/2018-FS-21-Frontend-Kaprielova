@@ -1,96 +1,72 @@
 import React, {Component} from 'react';
 
 /* Import Components */
-import Input from '../components/Input';
-import TextArea from '../components/TextArea';
-import Button from '../components/Button'
+//import Input from '../components/Input';
+//import TextArea from '../components/TextArea';
+import Button from '../components/Button';
 import './DottedBox.css';
 
 class FormContainer extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      newUser: {
-        name: '',
+    newBlog:{
+        name: window.localStorage.getItem('name'),
         about: ''
-      },
+        },
+     }
+
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleAboutChange = this.handleAboutChange.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
 
     }
-    this.handleTextArea = this.handleTextArea.bind(this);
-    this.handleFullName = this.handleFullName.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.handleClearForm = this.handleClearForm.bind(this);
-    this.handleInput = this.handleInput.bind(this);
-  }
 
-  /* This lifecycle hook gets executed when the component mounts */
-
-  handleFullName(e) {
+   handleNameChange(e) {
    let value = e.target.value;
-   this.setState( prevState => ({ newUser :
-        {...prevState.newUser, name: value
+   this.setState( prevState => ({ newBlog :
+        {...prevState.newBlog, name: value
         }
-      }), () => console.log(this.state.newUser))
+      }), () => console.log(this.state.newBlog))
   }
 
-  handleInput(e) {
-       let value = e.target.value;
-       let name = e.target.name;
-   this.setState( prevState => ({ newUser :
-        {...prevState.newUser, [name]: value
-        }
-      }), () => console.log(this.state.newUser))
-  }
 
-  handleTextArea(e) {
-    console.log("Inside handleTextArea");
+    handleAboutChange(e) {
     let value = e.target.value;
     this.setState(prevState => ({
-      newUser: {
+      newBlog: {
         ...prevState.newUser, about: value
       }
-      }), ()=>console.log(this.state.newUser))
+      }), ()=>console.log(this.state.newBlog))
   }
 
 
-  handleFormSubmit(e) {
+   handleFormSubmit(e) {
     e.preventDefault();
-    let userData = this.state.newUser;
+    let BlogData = this.state.newBlog;
 
-  }
-
-  handleClearForm(e) {
-
-      e.preventDefault();
-      this.setState({
-        newUser: {
-          name: '',
-          about: ''
-        },
-      })
   }
 
   render() {
     return (
 
-        <form className="DottedBox"onSubmit={this.handleFormSubmit}>
+        <form className="DottedBox"onSubmit={this.handleSubmit}>
 
-            <Input inputType={'text'}
+            <input  className="form-control"
                    title= {'Username'}
                    name= {'name'}
-                   value={this.state.newUser.name}
+                   value={this.state.name}
                    placeholder = {'Enter your name'}
-                   handleChange = {this.handleInput}
-                  style={textStyle}
+                   onChange = {this.handleNameChange}
+                   style={textStyle}
 
 
                    /> {/* Name of the user */}
-          <TextArea
+          <input className="form-control"
             title={'Blog'}
-            value={this.state.newUser.about}
+            value={this.state.about}
             name={'Info'}
-            handleChange={this.handleTextArea}
+            onChange={this.handleAboutChange}
             placeholder={'Describe the main idea'}
 
 
@@ -105,17 +81,11 @@ class FormContainer extends Component {
             style={buttonStyle}
           /> { /*Submit */ }
 
-          <Button
-            action = {this.handleClearForm}
-            type = {'secondary'}
-            title = {'Clear'}
-            style={buttonStyle}
-          /> {/* Clear the form */}
-
         </form>
 
     );
   }
+
 }
 
 const buttonStyle = {
