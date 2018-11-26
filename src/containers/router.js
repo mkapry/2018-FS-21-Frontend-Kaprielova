@@ -78,6 +78,16 @@ function Blog({ match }) {
   );
 }
 
+function NewBlog() {
+  return (
+    <div>
+      <h2>Create a blog</h2>
+      < FormContainer/>
+    </div>
+  );
+}
+
+
 
 
 export default Full;

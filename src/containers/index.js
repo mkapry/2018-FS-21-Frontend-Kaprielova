@@ -52,7 +52,7 @@ class FormContainer extends Component {
     return (
 
         <form className="DottedBox"onSubmit={this.handleSubmit}>
-
+                <div>New Blog</div>
             <input  className="form-control"
                    title= {'Username'}
                    name= {'name'}
