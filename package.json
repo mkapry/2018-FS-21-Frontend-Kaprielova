@@ -10,16 +10,15 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mkapry/frount-track.git"
+  "eslintConfig": {
+    "extends": "react-app"
   },
-  "author": "masha",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mkapry/frount-track/issues"
-  },
-  "homepage": "https://github.com/mkapry/frount-track#readme",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
@@ -33,9 +32,9 @@
     "ajv": "^6.5.5",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
-    "react-dropzone": "^7.0.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
+    "react-dropzone": "^7.0.1",
     "superagent": "^4.0.0"
   }
 }
