@@ -8,6 +8,7 @@ import './DottedBox.css';
 
 class FormContainer extends Component {
   constructor(props) {
+    const BlogId = props.id;
     super(props);
     this.state = {
     newBlog:{
@@ -44,14 +45,14 @@ class FormContainer extends Component {
    handleFormSubmit(e) {
     e.preventDefault();
     let BlogData = this.state.newBlog;
-
+    window.localStorage.setItem(this.props.id, JSON.stringify(BlogData));
   }
 
   render() {
     return (
 
         <form className="DottedBox"onSubmit={this.handleSubmit}>
-
+                <div>New Blog</div>
             <input  className="form-control"
                    title= {'Username'}
                    name= {'name'}
