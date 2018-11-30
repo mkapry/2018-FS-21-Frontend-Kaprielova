@@ -1,76 +1,83 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
+
+import { BrowserRouter as Router, Route, Link, Switch, Redirect} from 'react-router-dom';
 import './router.css';
 import Welcome from './Welcome/Welcome.js';
 import FormContainer from './index.js';
+import React, { Component } from 'react';
+import Layout from '../components/Layout/Layout';
+import Auth from './Auth/Auth.js';
+import {connect} from 'react-redux';
+import * as actions from './store/actions';
+
+const Home = () => (
+  <div>Home</div>
+);
 
 
-function Full() {
-  return (
-    <Router >
-      <div className="Full">
-        <ul>
-          <li>
-            <Link to='/'>Home</Link>
-          </li>
-          <li>
-            <Link to='/profile'>Profile</Link>
-          </li>
-          <li>
-            <Link to='/blogs'>Blogs</Link>
-          </li>
-           <li>
-            <Link to='/newblog'>NewBlog</Link>
-          </li>
-        </ul>
+const Blogs = () => (
+  <div>Blogs</div>
+);
 
-        <hr />
 
-        <Route exact path='/' component={Home} />
-        <Route path='/profile' component={Profile} />
-        <Route path='/blogs' component={Blogs} />
-        <Route path='/newblog' component={NewBlog} />
-      </div>
-    </Router>
-  );
-}
-
-function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
-    </div>
-  );
-}
-
-function Profile() {
+class App extends Component {
+  componentDidMount() {
+    this.props.checkToken();
+  }
+ render() {
+    let route =
+      (
+        <Switch>
+          <Route path='/' exact component={Home} />
+          <Route path='/profile' exact component={Auth} />
+          <Redirect to='/'></Redirect>
+        </Switch>
+      );
+     if(this.props.token) {
+      route = (
+        <Switch>
+            <Route exact path='/' component={Home} />
+            <Route path='/profile' component={Profile} />
+            <Route path='/blogs' component={Blogs} />
+            <Route path='/newblog' component={FormContainer} />
+        </Switch>
+      )
+    };
+  function Profile() {
   return (
     <div>
       <h2>User Profile</h2>
-      <Welcome />
+      <Auth />
     </div>
   );
 }
 
-function Blogs({ match }) {
   return (
-    <div>
-      <h2>Blogs</h2>
-    </div>
-  );
-}
-
-
-function NewBlog() {
-  return (
-    <div>
-      <h2>Create a blog</h2>
-      <FormContainer/>
-    </div>
-  );
+     <Router>
+        <Layout>
+        <div className="Full">
+          {route}
+         </div>
+        </Layout>
+      </Router>
+    )
+  }
 }
 
 
 
 
-export default Full;
+
+const mapStateToProps = state => {
+  return {
+    token: state.auth.token,
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return  {
+    checkToken: () => dispatch(actions.authCheckState())
+  }
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

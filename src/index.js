@@ -2,14 +2,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Full from './containers/router.js';
+import App from './containers/router.js';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<Full />, document.getElementById('root'));
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import authReducer from './containers/store/reducers/auth';
+import thunk from 'redux-thunk';
 
+const rootReducer = combineReducers({
+  auth: authReducer
+});
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(rootReducer, composeEnhancers(
+  applyMiddleware(thunk)
+));
+
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();
-

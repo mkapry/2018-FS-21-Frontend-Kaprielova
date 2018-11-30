@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
-//import logo from './logo.svg';
-import './containers/DottedBox.css';
-import FormContainer from './containers/index.js';
-//import Geo from './containers/geo.js';
-//import Welcome from './containers/Welcome/Welcome.js';
-import DropZ from './containers/drag_and_drop.js';
+import { combineReducers } from 'redux';
+import { Provider } from 'react-redux';
 
-class App extends Component {
+//import { createStore, renderDevTools } from '../store/devTools';
+
+import FriendListApp from './FriendListApp';
+import * as reducers from '../reducers';
+
+const reducer = combineReducers(reducers);
+//const store = createStore(reducer);
+
+export default class App extends Component {
   render() {
     return (
-      <div className="DottedBox">
-      <p className="DottedBox_content">Blog form</p>
-        <FormContainer />
-        <DropZ/>
+      <div>
+        <Provider>
+          {() => <FriendListApp /> }
+        </Provider>
+
+
       </div>
     );
   }
 }
-
-export default App;
