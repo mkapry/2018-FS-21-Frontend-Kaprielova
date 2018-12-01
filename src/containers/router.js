@@ -8,6 +8,7 @@ import Layout from '../components/Layout/Layout';
 import Auth from './Auth/Auth.js';
 import {connect} from 'react-redux';
 import * as actions from './store/actions';
+import Socket from './Socket/Socket';
 
 const Home = () => (
   <div>Home</div>
@@ -26,20 +27,24 @@ class App extends Component {
  render() {
     let route =
       (
-        <Switch>
-          <Route path='/' exact component={Home} />
-          <Route path='/profile' exact component={Auth} />
-          <Redirect to='/'></Redirect>
-        </Switch>
+        <Layout>
+            <Switch>
+              <Route path='/' exact component={Home} />
+              <Route path='/profile' exact component={Auth} />
+              <Redirect to='/'></Redirect>
+            </Switch>
+        </Layout>
       );
      if(this.props.token) {
       route = (
-        <Switch>
-            <Route exact path='/' component={Home} />
-            <Route path='/profile' component={Profile} />
-            <Route path='/blogs' component={Blogs} />
-            <Route path='/newblog' component={FormContainer} />
-        </Switch>
+        <Layout>
+            <Switch>
+                <Route exact path='/' component={Home} />
+                <Route path='/profile' component={Profile} />
+                <Route path='/blogs' component={Blogs} />
+                <Route path='/newblog' component={FormContainer} />
+            </Switch>
+        </Layout>
       )
     };
   function Profile() {
@@ -52,13 +57,13 @@ class App extends Component {
 }
 
   return (
+    <div className="Full">
      <Router>
-        <Layout>
-        <div className="Full">
           {route}
-         </div>
-        </Layout>
+
       </Router>
+      <Socket/>
+    </div>
     )
   }
 }
