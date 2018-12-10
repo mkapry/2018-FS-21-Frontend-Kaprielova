@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import {connect} from 'react-redux';
 
-const URL_ADDRESS = 'ws://localhost:8080';
+const URL_ADDRESS = 'ws://localhost:8000';
 
 class Socket extends Component {
     state = {
@@ -10,11 +10,13 @@ class Socket extends Component {
     componentDidMount() {
         this.connectToSocket();
     };
+
     connectToSocket() {
-        this.state.socket.onopen = () => {
-            console.log('connected');
+        const Soc = this.state.socket;
+        Soc.onopen = () => {
+            console.log('Соединение закрыто');
         };
-        this.state.socket.onmessage = (message) => {
+        Soc.onmessage = (message) => {
             const response = JSON.parse(message.data);
             switch (response.type) {
                 case 'newBlog':
@@ -25,16 +27,19 @@ class Socket extends Component {
             }
             console.log('message ->', );
         };
-        this.state.socket.onerror = (error) => {
+
+        Soc.onerror = (error) => {
             console.log('Ошибка', error.type);
         };
-        this.state.socket.onclose = () => {
+        Soc.onclose = () => {
             console.log('Соединение закрыто');
         };
     }
+
     newBlogHandler(blogs) {
         this.props.onNewMessage(blogs);
     }
+
     render() {
         if(this.props.newBlog) {
             const data = JSON.stringify(this.props.newBlog);

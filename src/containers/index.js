@@ -8,7 +8,7 @@ import './DottedBox.css';
 
 class FormContainer extends Component {
   constructor(props) {
-    const BlogId = props.id;
+    //const BlogId = props.id;
     super(props);
     this.state = {
     newBlog:{
@@ -44,8 +44,17 @@ class FormContainer extends Component {
 
    handleFormSubmit(e) {
     e.preventDefault();
-    let BlogData = this.state.newBlog;
-    window.localStorage.setItem(this.props.id, JSON.stringify(BlogData));
+    //let BlogData = this.state.newBlog;
+    //window.localStorage.setItem(this.props.id, JSON.stringify(BlogData));
+    let BlogData = new FormData();
+		BlogData.append('name', this.state.name);
+		BlogData.append('about', this.state.about);
+		fetch('http://localhost:8000/create', {
+		  method: 'POST',
+		  body: BlogData
+		}).then(response => response.json())
+		.then(response => console.log('Success:', JSON.stringify(response)))
+		.catch(error => console.error('Error:', error));
   }
 
   render() {
