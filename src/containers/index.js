@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 /* Import Components */
 //import Input from '../components/Input';
 //import TextArea from '../components/TextArea';
-import Button from '../components/Button';
+import Button from '../components/Button/Button';
 import './DottedBox.css';
 
 class FormContainer extends Component {
